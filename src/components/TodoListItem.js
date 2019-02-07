@@ -14,7 +14,7 @@ const { Meta } = Card;
 const TodoListItem = (props) => {
     let todoData = props.todo;
     return(
-        <Col xxl={6} xl={8} lg={12} md={24} sm={24} xs={24}>
+        <Col xxl={6} xl={8} lg={12} md={12} sm={24} xs={24}>
                 <Card className="card">
                     <Meta
                         title= {todoData.title}
