@@ -7,6 +7,7 @@ import {
   Tooltip
 } from 'antd';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './routes/Home';
 import './App.css';
 
 const { 
@@ -87,7 +88,7 @@ class App extends Component {
           <Content>
             <BrowserRouter>
               <Switch>
-                {/* <Route path="/" component={Home} /> */}
+                <Route path="/" component={Home} />
               </Switch>
             </BrowserRouter>
           </Content>
