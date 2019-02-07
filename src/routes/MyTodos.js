@@ -4,6 +4,7 @@ import { APIBaseUrl } from '../appConfig';
 import {
     Divider
 } from 'antd';
+import TodoList from '../components/TodoList';
 
 class MyTodos extends Component{
     state = {
@@ -23,7 +24,9 @@ class MyTodos extends Component{
             <div className="content">
                 <Divider orientation="left">
                     TODOS
-                </Divider>                
+                </Divider>      
+                <TodoList
+                    todos={this.state.todos}/>          
             </div>
         );
     }
