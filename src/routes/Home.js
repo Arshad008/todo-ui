@@ -24,8 +24,7 @@ class Home extends Component{
         Axios.get(finishedTodosUrl)
         .then(res=>{
             let data = res.data.result;
-            this.setState({finishedTodos: data});  
-            console.log(this.state.finishedTodos);          
+            this.setState({finishedTodos: data});                    
         }).catch(err=>console.error(err));
     }
     render(){
