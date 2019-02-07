@@ -5,17 +5,27 @@ import {
     Divider
 } from 'antd';
 import TodoList from '../components/TodoList';
+import FinishedTodoList from '../components/FinishedTodoList';
 
 class Home extends Component{
     state = {
-        todos:[]
+        todos:[],
+        finishedTodos:[]
     }
     componentWillMount(){
-        let url = APIBaseUrl + "/todos";
-        Axios.get(url)
+        let todosUrl = APIBaseUrl + "/todos";
+        Axios.get(todosUrl)
         .then(res=>{
             let data = res.data.result;
             this.setState({todos: data});            
+        }).catch(err=>console.error(err));
+
+        let finishedTodosUrl= APIBaseUrl + "/finishedTodos";
+        Axios.get(finishedTodosUrl)
+        .then(res=>{
+            let data = res.data.result;
+            this.setState({finishedTodos: data});  
+            console.log(this.state.finishedTodos);          
         }).catch(err=>console.error(err));
     }
     render(){
@@ -26,6 +36,11 @@ class Home extends Component{
                 </Divider>
                 <TodoList
                     todos={this.state.todos}/>
+                <Divider orientation="left">
+                    Finished
+                </Divider>
+                <FinishedTodoList
+                    finishedTodos={this.state.finishedTodos}/>
             </div>
         );                    
     }
