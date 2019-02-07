@@ -46,7 +46,7 @@ class App extends Component {
             {/* Menu Items */}
             <Menu.Item key="1" style={{marginTop: "50px"}}>
               <Icon type="home"/>
-              <span>Home</span>
+              <span>Home</span>              
             </Menu.Item>
             <Menu.Item key="2">
               <Icon type="database"/>
@@ -88,7 +88,7 @@ class App extends Component {
           <Content>
             <BrowserRouter>
               <Switch>
-                <Route path="/" component={Home} />
+                <Route path="/" component={Home} exact/>
               </Switch>
             </BrowserRouter>
           </Content>
