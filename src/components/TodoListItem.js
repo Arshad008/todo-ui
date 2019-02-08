@@ -33,8 +33,7 @@ const TodoListItem = (props) => {
                                             .then(res=>{
                                                 let data = res.data.result;
                                                 props.onUpdate(index,data);                                                                                                
-                                            }).catch(err=>console.error(err));
-                                            console.log(url);
+                                            }).catch(err=>console.error(err));                                            
                                         }}></Button>
                                     </Tooltip>
                                     <Popconfirm title="Are you sure you want to Delete this Todo?" onConfirm={()=>{
