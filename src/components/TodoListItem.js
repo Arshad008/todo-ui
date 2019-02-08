@@ -1,4 +1,6 @@
 import React from 'react';
+import Axios from 'axios';
+import { APIBaseUrl } from '../appConfig';
 import {
     Col,
     Card,
@@ -13,6 +15,7 @@ const { Meta } = Card;
 
 const TodoListItem = (props) => {
     let todoData = props.todo;
+    let index = props.index;
     return(
         <Col xxl={6} xl={8} lg={12} md={12} sm={24} xs={24}>
                 <Card className="card">
@@ -24,7 +27,14 @@ const TodoListItem = (props) => {
                                 <div style={{margin: "5px"}}><Tag color="gray" style={{marginTop: "10px"}}>{todoData.tag}</Tag></div>
                                 <div align="right">                                                                                
                                     <Tooltip title="Done">
-                                        <Button type="default" shape="circle" icon="check" style={{marginRight: "5px"}}></Button>
+                                        <Button type="default" shape="circle" icon="check" style={{marginRight: "5px"}} onClick={()=>{
+                                            let url = APIBaseUrl + "/updateStatus/" + todoData._id;
+                                            Axios.put(url, {status: "finished"})
+                                            .then(res=>{
+                                                let data = res.data.result;                                                                                                
+                                            }).catch(err=>console.error(err));
+                                            console.log(url);
+                                        }}></Button>
                                     </Tooltip>
                                     <Popconfirm title="Are you sure you want to Delete this Todo?" onConfirm={()=>{
                                         message.success("Todo Deleted");
