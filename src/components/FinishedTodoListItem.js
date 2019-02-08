@@ -1,4 +1,6 @@
 import React from 'react';
+import Axios from 'axios';
+import { APIBaseUrl } from '../appConfig';
 import {    
     Col,
     Card,
@@ -34,7 +36,12 @@ const FinishedTodoListItem = (props) => {
                                     <Tag color="gray" style={{marginTop: "10px"}}>{finsihedTodoData.tag}</Tag>                                                                                
                                     <Tooltip title="Delete">
                                         <Button type="danger" shape="circle" icon="delete" style={{float: "right", marginRight: "5px"}} onClick={()=>{
-                                            message.success("Todo Deleted");
+                                            let url = APIBaseUrl + "/delete/" + finsihedTodoData._id;
+                                            Axios.delete(url)
+                                            .then(res=>{
+                                                let data = res.data.result;
+                                                message.success("Finished Todo Deleted");
+                                            }).catch(err=>console.error(err));
                                         }}></Button>
                                     </Tooltip>
                                 </div>
