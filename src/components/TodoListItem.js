@@ -38,6 +38,11 @@ const TodoListItem = (props) => {
                                         }}></Button>
                                     </Tooltip>
                                     <Popconfirm title="Are you sure you want to Delete this Todo?" onConfirm={()=>{
+                                        let url = APIBaseUrl + "/delete/" + todoData._id;
+                                        Axios.delete(url)
+                                        .then(res=>{
+                                            let data = res.data.result;
+                                        })
                                         message.success("Todo Deleted");
                                     }}>
                                         <Tooltip title="Delete">
