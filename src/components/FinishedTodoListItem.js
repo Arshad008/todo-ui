@@ -15,6 +15,7 @@ const { Meta } = Card;
 
 const FinishedTodoListItem = (props) => {
     let finsihedTodoData = props.finishedTodo;
+    let index = props.index;
     return(
         <Col xxl={6} xl={8} lg={12} md={24} sm={24} xs={24}>
                 <Card className="card" >
@@ -40,7 +41,7 @@ const FinishedTodoListItem = (props) => {
                                             Axios.delete(url)
                                             .then(res=>{
                                                 let data = res.data.result;
-                                                message.success("Finished Todo Deleted");
+                                                props.onDeleteFinishedTodo(index);
                                             }).catch(err=>console.error(err));
                                         }}></Button>
                                     </Tooltip>

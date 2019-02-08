@@ -32,6 +32,11 @@ class Home extends Component{
         newTodos.splice(index,1);
         this.setState({todos: newTodos});
     }   
+    onDeleteFinishedTodo(index){
+        let newFinishedTodos = this.state.finishedTodos;
+        newFinishedTodos.splice(index, 1);
+        this.setState({finishedTodos: newFinishedTodos});
+    }
     render(){
         return(
             <div className="content">
@@ -55,7 +60,8 @@ class Home extends Component{
                     Finished
                 </Divider>
                 <FinishedTodoList
-                    finishedTodos={this.state.finishedTodos}/>
+                    finishedTodos={this.state.finishedTodos}
+                    onDeleteFinishedTodo={this.onDeleteFinishedTodo.bind(this)}/>
             </div>
         );                    
     }

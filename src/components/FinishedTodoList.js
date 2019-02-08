@@ -9,7 +9,8 @@ const FinishedTodoList = (props) => {
         return <FinishedTodoListItem
                     key={i}
                     finishedTodo = {ftd}
-                    index={i}/>
+                    index={i}
+                    onDeleteFinishedTodo={props.onDeleteFinishedTodo}/>
     });
     return(
         <Row gutter={16}>
