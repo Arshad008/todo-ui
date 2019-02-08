@@ -37,6 +37,16 @@ class Home extends Component{
         newFinishedTodos.splice(index, 1);
         this.setState({finishedTodos: newFinishedTodos});
     }
+    onUpdate(index,data){
+        let newTodos = this.state.todos;
+        let newFinishedTodos = this.state.finishedTodos;
+        // cut from todos
+        newTodos.splice(index,1);
+        this.setState({todos: newTodos});
+        // append to finished todos
+        newFinishedTodos.push(data);
+        this.setState({finishedTodos: newFinishedTodos});
+    }
     render(){
         return(
             <div className="content">
@@ -45,16 +55,7 @@ class Home extends Component{
                 </Divider>
                 <TodoList
                     todos={this.state.todos}
-                    onUpdate={(index, data)=>{
-                        let newTodos = this.state.todos;
-                        let newFinishedTodos = this.state.finishedTodos;
-                        // cut from todos
-                        newTodos.splice(index,1);
-                        this.setState({todos: newTodos});
-                        // append to finished todos
-                        newFinishedTodos.push(data);
-                        this.setState({finishedTodos: newFinishedTodos});
-                    }}
+                    onUpdate={this.onUpdate.bind(this)}
                     onDelete={this.onDelete.bind(this)}/>
                 <Divider orientation="left">
                     Finished
