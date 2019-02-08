@@ -15,8 +15,7 @@ class MyTodos extends Component{
         Axios.get(todosUrl)
         .then(res=>{
             let data = res.data.result;
-            this.setState({todos: data});  
-            console.log(this.state.todos);
+            this.setState({todos: data});              
         }).catch(err=>console.error(err));
     }
     render(){
