@@ -31,7 +31,8 @@ const TodoListItem = (props) => {
                                             let url = APIBaseUrl + "/updateStatus/" + todoData._id;
                                             Axios.put(url, {status: "finished"})
                                             .then(res=>{
-                                                let data = res.data.result;                                                                                                
+                                                let data = res.data.result;
+                                                props.onUpdate(index,data);                                                                                                
                                             }).catch(err=>console.error(err));
                                             console.log(url);
                                         }}></Button>
