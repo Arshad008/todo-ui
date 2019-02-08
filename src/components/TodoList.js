@@ -1,7 +1,8 @@
 import React from 'react';
 import TodoListItem from './TodoListItem';
 import {
-    Row
+    Row,
+    Empty
 } from 'antd';
 
 const TodoList = (props) => {
@@ -14,11 +15,19 @@ const TodoList = (props) => {
                     onUpdate={props.onUpdate}/>
         );
     });
-    return(
-        <Row gutter={16}>
-            {todos}
-        </Row>
-    );
+    if(todos[0] == null){
+        return(
+            <Row>
+                <Empty description={<span>No todos are available</span>}/>
+            </Row>
+        );        
+    }else{
+        return(
+            <Row gutter={16}>
+                {todos}
+            </Row>
+        );        
+    }
 }
 
 export default TodoList;
