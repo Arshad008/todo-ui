@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Home from './routes/Home';
 import MyTodos from './routes/MyTodos';
 import './App.css';
+import FinishedTodos from './routes/FinishedTodos';
 
 const { 
   Header, 
@@ -75,6 +76,7 @@ class App extends Component {
               <Menu.Item key="6">
                 <Icon type="check"/>
                 <span>Finished</span>
+                <Link to="/finishedTodos"></Link>
               </Menu.Item>            
             </Menu> 
             {/* Menu End */}
@@ -93,6 +95,7 @@ class App extends Component {
               <Switch>
                 <Route path="/" component={ Home } exact/>
                 <Route path="/myTodos" component={ MyTodos }/>
+                <Route path="/finishedTodos" component={ FinishedTodos }/>
               </Switch>            
             </Content>
             {/* Content End*/}          
