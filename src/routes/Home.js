@@ -34,7 +34,17 @@ class Home extends Component{
                     TODOS
                 </Divider>
                 <TodoList
-                    todos={this.state.todos}/>
+                    todos={this.state.todos}
+                    onUpdate={(index, data)=>{
+                        let newTodos = this.state.todos;
+                        let newFinishedTodos = this.state.finishedTodos;
+                        // cut from todos
+                        newTodos.splice(index,1);
+                        this.setState({todos: newTodos});
+                        // append to finished todos
+                        newFinishedTodos.push(data);
+                        this.setState({finishedTodos: newFinishedTodos});
+                    }}/>
                 <Divider orientation="left">
                     Finished
                 </Divider>

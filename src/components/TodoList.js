@@ -6,10 +6,13 @@ import {
 
 const TodoList = (props) => {
     let todos = props.todos.map((td, i)=>{
-        return <TodoListItem 
+        return(
+            <TodoListItem 
                     key={i}
                     todo={td}
-                    index={i}/>
+                    index={i}
+                    onUpdate={props.onUpdate}/>
+        );
     });
     return(
         <Row gutter={16}>
