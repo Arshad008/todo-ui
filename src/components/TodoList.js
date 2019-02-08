@@ -12,7 +12,8 @@ const TodoList = (props) => {
                     key={i}
                     todo={td}
                     index={i}
-                    onUpdate={props.onUpdate}/>
+                    onUpdate={props.onUpdate}
+                    onDelete={props.onDelete}/>
         );
     });
     if(todos[0] == null){

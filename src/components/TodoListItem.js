@@ -42,6 +42,7 @@ const TodoListItem = (props) => {
                                         Axios.delete(url)
                                         .then(res=>{
                                             let data = res.data.result;
+                                            props.onDelete(index);
                                         })
                                         message.success("Todo Deleted");
                                     }}>

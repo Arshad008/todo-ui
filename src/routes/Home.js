@@ -27,6 +27,11 @@ class Home extends Component{
             this.setState({finishedTodos: data});                    
         }).catch(err=>console.error(err));
     }
+    onDelete(index){
+        let newTodos = this.state.todos;
+        newTodos.splice(index,1);
+        this.setState({todos: newTodos});
+    }   
     render(){
         return(
             <div className="content">
@@ -44,7 +49,8 @@ class Home extends Component{
                         // append to finished todos
                         newFinishedTodos.push(data);
                         this.setState({finishedTodos: newFinishedTodos});
-                    }}/>
+                    }}
+                    onDelete={this.onDelete.bind(this)}/>
                 <Divider orientation="left">
                     Finished
                 </Divider>
