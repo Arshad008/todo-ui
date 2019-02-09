@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
+import { APIBaseUrl } from './appConfig';
 import { 
   Layout, 
   Menu,
   Icon,
   Button,
-  Tooltip
+  Tooltip,
+  Divider
 } from 'antd';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import Home from './routes/Home';
-import MyTodos from './routes/MyTodos';
 import './App.css';
-import FinishedTodos from './routes/FinishedTodos';
+import TodoList from './components/TodoList';
+import FinishedTodoList from './components/FinishedTodoList';
 
 const { 
   Header, 
@@ -23,10 +25,47 @@ const { SubMenu } = Menu;
 
 class App extends Component {
   state = {
-    collapsed: false
+    collapsed: false,
+    todos:[],
+    finishedTodos:[]
   }
   onCollapse = (collapsed) => {
     this.setState({collapsed});
+  }
+  componentWillMount(){
+    let todosUrl = APIBaseUrl + "/todos";
+    Axios.get(todosUrl)
+    .then(res=>{
+        let data = res.data.result;
+        this.setState({todos: data});            
+    }).catch(err=>console.error(err));
+
+    let finishedTodosUrl= APIBaseUrl + "/finishedTodos";
+    Axios.get(finishedTodosUrl)
+    .then(res=>{
+        let data = res.data.result;
+        this.setState({finishedTodos: data});                    
+    }).catch(err=>console.error(err));
+  }
+  onUpdateStatus(index,data){
+    let newTodos = this.state.todos;
+    let newFinishedTodos = this.state.finishedTodos;
+    // cut from todos
+    newTodos.splice(index,1);
+    this.setState({todos: newTodos});
+    // append to finished todos
+    newFinishedTodos.push(data);
+    this.setState({finishedTodos: newFinishedTodos});
+  }
+  onDeleteTodo(index){
+    let newTodos = this.state.todos;
+    newTodos.splice(index,1);
+    this.setState({todos: newTodos});
+  }
+  onDeleteFinishedTodo(index){
+    let newFinishedTodos = this.state.finishedTodos;
+    newFinishedTodos.splice(index, 1);
+    this.setState({finishedTodos: newFinishedTodos});
   }
   render() {
     return (
@@ -91,13 +130,21 @@ class App extends Component {
           {/* Sub Layout */}
           <Layout>
             {/* Content */}
-            <Content>            
-              <Switch>
-                <Route path="/" component={ Home } exact/>
-                <Route path="/myTodos" component={ MyTodos }/>
-                <Route path="/finishedTodos" component={ FinishedTodos }/>
-              </Switch>            
-            </Content>
+            <div className="content">
+              <Divider orientation="left">
+                TODOS
+              </Divider>
+              <TodoList 
+                todos={this.state.todos}
+                onUpdateStatus={this.onUpdateStatus.bind(this)}
+                onDeleteTodo={this.onDeleteTodo.bind(this)}/>
+              <Divider orientation="left">
+                Finished
+              </Divider>
+              <FinishedTodoList 
+                finishedTodos={this.state.finishedTodos}
+                onDeleteFinishedTodo={this.onDeleteFinishedTodo.bind(this)}/>
+            </div>
             {/* Content End*/}          
           </Layout>
           {/* Sub layout end */}
