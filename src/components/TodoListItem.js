@@ -39,7 +39,7 @@ class TodoListItem extends Component{
                         description={
                             <div>
                                 <div style={{textAlign: "justify"}}>{todoData.description}</div>
-                                <div style={{margin: "5px"}}><Tag color="gray" style={{marginTop: "10px"}}>{todoData.tag}</Tag></div>
+                                <div style={{margin: "5px"}}>{todoData.tag == " " ? " " :  <Tag color="gray" style={{marginTop: "10px"}}>{todoData.tag}</Tag>}</div>
                                 <div align="right">                                                                                
                                     <Tooltip title="Done">
                                         <Button type="default" shape="circle" icon="check" style={{marginRight: "5px"}} onClick={()=>{
@@ -71,7 +71,9 @@ class TodoListItem extends Component{
                                         closable={false}
                                         onClose={this.onClose}
                                         visible={this.state.visible}
-                                        todoData={todoData}/>
+                                        todoData={todoData}
+                                        index={index}
+                                        onTodoUpdated={this.props.onTodoUpdated}/>
                                 </div>
                             </div>
                         }     
