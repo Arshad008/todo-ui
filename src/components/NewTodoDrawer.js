@@ -34,6 +34,7 @@ class NewTodoDrawer extends Component{
                     this.props.form.resetFields();
                     this.props.onTodoAdded(data);
                     message.success("Todo Added");
+                    this.onClose();
                 }).catch(err=>console.error(err));
             }
         });        
