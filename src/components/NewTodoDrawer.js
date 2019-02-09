@@ -23,7 +23,7 @@ class NewTodoDrawer extends Component{
                 let newTodo = {
                     title: values.title,
                     description: values.description,
-                    tag: values.tag.toLowerCase(),
+                    tag: values.tag ? values.tag.toLowerCase() : " ",
                     status: "todo",
                     addedOn: new Date().getTime()
                 }                
