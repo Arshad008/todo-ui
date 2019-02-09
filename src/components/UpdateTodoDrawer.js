@@ -12,7 +12,7 @@ import {
 } from 'antd';
 
 class UpdateTodoDrawer extends Component{    
-    handleSubmit = (e,id) => {
+    handleSubmit = (e,id, index) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values)=> {
             if(!err){                                
@@ -26,15 +26,18 @@ class UpdateTodoDrawer extends Component{
                 let url = APIBaseUrl + "/updateTodo/" + id;
                 Axios.put(url, editedTodo)
                 .then(res=>{
-                    let data = res.data.result;
-                    console.log(data);
+                    let data = res.data.result;                    
+                    this.props.onTodoUpdated(index,editedTodo);                    
+                    this.props.onClose();
+                    message.success("Todo Updated");
                 }).catch(err=>console.error(err));
             }
         });        
     } 
     render(){
         const { getFieldDecorator } = this.props.form; 
-        let todoData = this.props.todoData;        
+        let todoData = this.props.todoData;      
+        let index = this.props.index;  
         return(
             <Drawer
                     title="Update Todo"
@@ -86,7 +89,7 @@ class UpdateTodoDrawer extends Component{
                             {/* Add Button */}
                             <Form.Item>
                                 <Button type="primary" icon="edit" onClick={(e)=>{                                                                       
-                                    this.handleSubmit(e, todoData._id);
+                                    this.handleSubmit(e, todoData._id, index);
                                 }}>Edit Todo</Button>
                                 &nbsp;
                                 <Button type="default" onClick={this.props.onClose}>Cancel</Button>

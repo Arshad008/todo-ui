@@ -73,6 +73,11 @@ class App extends Component {
     newTodos.push(newTodo);
     this.setState({todos: newTodos});
   }
+  onTodoUpdated(index,data){
+    let newTodos = this.state.todos;    
+    newTodos[index] = data;
+    this.setState({todos: newTodos});
+  }
   render() {
     return (
       <BrowserRouter>
@@ -142,7 +147,8 @@ class App extends Component {
                 <TodoList 
                   todos={this.state.todos}
                   onUpdateStatus={this.onUpdateStatus.bind(this)}
-                  onDeleteTodo={this.onDeleteTodo.bind(this)}/>
+                  onDeleteTodo={this.onDeleteTodo.bind(this)}
+                  onTodoUpdated={this.onTodoUpdated.bind(this)}/>
                 <Divider orientation="left">
                   Finished
                 </Divider>

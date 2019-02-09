@@ -13,7 +13,8 @@ const TodoList = (props) => {
                     todo={td}
                     index={i}
                     onUpdateStatus={props.onUpdateStatus}
-                    onDeleteTodo={props.onDeleteTodo}/>
+                    onDeleteTodo={props.onDeleteTodo}
+                    onTodoUpdated={props.onTodoUpdated}/>
         );
     });
     if(todos[0] == null){
