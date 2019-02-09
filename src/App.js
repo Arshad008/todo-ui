@@ -13,6 +13,7 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
 import TodoList from './components/TodoList';
 import FinishedTodoList from './components/FinishedTodoList';
+import NewTodoDrawer from './components/NewTodoDrawer';
 
 const { 
   Header, 
@@ -120,11 +121,8 @@ class App extends Component {
             </Menu> 
             {/* Menu End */}
             {/* Add New Button */}          
-            <div align="center" style={{marginTop: "20px", width: "100%"}}>
-            <Tooltip title="Add New Todo" placement="right">
-              <Button type="primary" icon="plus" shape="circle"></Button>
-            </Tooltip>            
-            </div>          
+            <NewTodoDrawer/>
+            {/* Add new button end */}
           </Sider>
           {/* Sider End */}
           {/* Sub Layout */}
