@@ -10,10 +10,24 @@ import {
     Popconfirm,
     message
 } from 'antd';
+import UpdateTodoDrawer from './UpdateTodoDrawer';
 
 const { Meta } = Card;
 
 class TodoListItem extends Component{   
+    state = {
+        visible: false
+    }
+    showDrawer = () => {
+        this.setState({
+          visible: true,
+        });
+    };
+    onClose = () => {
+        this.setState({
+        visible: false,
+        });
+    };
     render(){
         let todoData = this.props.todo;
         let index = this.props.index;
@@ -51,8 +65,13 @@ class TodoListItem extends Component{
                                         </Tooltip>
                                     </Popconfirm>                                        
                                     <Tooltip title="Edit">
-                                        <Button type="defalut" shape="circle" icon="edit" style={{marginRight: "5px"}}></Button>
-                                    </Tooltip>                                 
+                                        <Button type="defalut" shape="circle" icon="edit" style={{marginRight: "5px"}} onClick={this.showDrawer}></Button>
+                                    </Tooltip>
+                                    <UpdateTodoDrawer
+                                        closable={false}
+                                        onClose={this.onClose}
+                                        visible={this.state.visible}
+                                        todoData={todoData}/>
                                 </div>
                             </div>
                         }     
