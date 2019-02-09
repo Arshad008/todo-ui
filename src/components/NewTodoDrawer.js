@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
+import { APIBaseUrl } from '../appConfig';
 import {    
     Drawer,
     Form,
@@ -17,9 +19,21 @@ class NewTodoDrawer extends Component{
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values)=> {
-            if(!err){
-                console.log(values);    
-                this.props.form.resetFields();                 
+            if(!err){                
+                let newTodo = {
+                    title: values.title,
+                    description: values.description,
+                    tag: values.tag.toLowerCase(),
+                    status: "todo",
+                    addedOn: new Date().getTime()
+                }                
+                let url = APIBaseUrl + "/saveTodo";
+                Axios.post(url, newTodo)
+                .then(res=>{
+                    let data = res.data.result;                    
+                    this.props.form.resetFields();
+                    message.success("Todo Added");
+                }).catch(err=>console.error(err));
             }
         });        
     }
@@ -55,7 +69,7 @@ class NewTodoDrawer extends Component{
                         <Form.Item                                                            
                             label="Todo Title"
                         >
-                            {getFieldDecorator('todoTitle',{
+                            {getFieldDecorator('title',{
                                 rules: [{
                                     required: true, message: 'Todo Title is required'
                                 }]
@@ -67,7 +81,7 @@ class NewTodoDrawer extends Component{
                         <Form.Item                                                            
                             label="Todo Description"
                         >
-                            {getFieldDecorator('todoDescription',{                                    
+                            {getFieldDecorator('description',{                                    
                             })(
                                 <Input placeholder="Todo Title"/>
                             )}                           
