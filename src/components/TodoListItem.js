@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Axios from 'axios';
 import { APIBaseUrl } from '../appConfig';
 import {
@@ -13,11 +13,12 @@ import {
 
 const { Meta } = Card;
 
-const TodoListItem = (props) => {
-    let todoData = props.todo;
-    let index = props.index;
-    return(
-        <Col xxl={6} xl={8} lg={12} md={12} sm={24} xs={24}>
+class TodoListItem extends Component{   
+    render(){
+        let todoData = this.props.todo;
+        let index = this.props.index;
+        return(
+            <Col xxl={6} xl={8} lg={12} md={12} sm={24} xs={24}>
                 <Card className="card">
                     <Meta
                         title= {todoData.title}
@@ -32,7 +33,7 @@ const TodoListItem = (props) => {
                                             Axios.put(url, {status: "finished"})
                                             .then(res=>{
                                                 let data = res.data.result;
-                                                props.onUpdateStatus(index,data);                                                                                                
+                                                this.props.onUpdateStatus(index,data);                                                                                                
                                             }).catch(err=>console.error(err));                                            
                                         }}></Button>
                                     </Tooltip>
@@ -41,7 +42,7 @@ const TodoListItem = (props) => {
                                         Axios.delete(url)
                                         .then(res=>{
                                             let data = res.data.result;
-                                            props.onDeleteTodo(index);
+                                            this.props.onDeleteTodo(index);
                                         })
                                         message.success("Todo Deleted");
                                     }}>
@@ -51,7 +52,7 @@ const TodoListItem = (props) => {
                                     </Popconfirm>                                        
                                     <Tooltip title="Edit">
                                         <Button type="defalut" shape="circle" icon="edit" style={{marginRight: "5px"}}></Button>
-                                    </Tooltip>                                         
+                                    </Tooltip>                                 
                                 </div>
                             </div>
                         }     
@@ -60,7 +61,8 @@ const TodoListItem = (props) => {
                     </Meta>                    
                 </Card>                    
             </Col>
-    );
+        );
+    }
 }
  
 export default TodoListItem;
