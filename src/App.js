@@ -68,6 +68,11 @@ class App extends Component {
     newFinishedTodos.splice(index, 1);
     this.setState({finishedTodos: newFinishedTodos});
   }
+  onTodoAdded(newTodo){
+    let newTodos = this.state.todos;
+    newTodos.push(newTodo);
+    this.setState({todos: newTodos});
+  }
   render() {
     return (
       <BrowserRouter>
@@ -121,28 +126,31 @@ class App extends Component {
             </Menu> 
             {/* Menu End */}
             {/* Add New Button */}          
-            <NewTodoDrawer/>
+            <NewTodoDrawer
+              onTodoAdded={this.onTodoAdded.bind(this)}/>
             {/* Add new button end */}
           </Sider>
           {/* Sider End */}
           {/* Sub Layout */}
           <Layout>
             {/* Content */}
-            <div className="content">
-              <Divider orientation="left">
-                TODOS
-              </Divider>
-              <TodoList 
-                todos={this.state.todos}
-                onUpdateStatus={this.onUpdateStatus.bind(this)}
-                onDeleteTodo={this.onDeleteTodo.bind(this)}/>
-              <Divider orientation="left">
-                Finished
-              </Divider>
-              <FinishedTodoList 
-                finishedTodos={this.state.finishedTodos}
-                onDeleteFinishedTodo={this.onDeleteFinishedTodo.bind(this)}/>
-            </div>
+            <Content>
+              <div className="content">
+                <Divider orientation="left">
+                  TODOS
+                </Divider>
+                <TodoList 
+                  todos={this.state.todos}
+                  onUpdateStatus={this.onUpdateStatus.bind(this)}
+                  onDeleteTodo={this.onDeleteTodo.bind(this)}/>
+                <Divider orientation="left">
+                  Finished
+                </Divider>
+                <FinishedTodoList 
+                  finishedTodos={this.state.finishedTodos}
+                  onDeleteFinishedTodo={this.onDeleteFinishedTodo.bind(this)}/>
+              </div>
+            </Content>
             {/* Content End*/}          
           </Layout>
           {/* Sub layout end */}

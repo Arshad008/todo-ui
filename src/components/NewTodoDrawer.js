@@ -32,6 +32,7 @@ class NewTodoDrawer extends Component{
                 .then(res=>{
                     let data = res.data.result;                    
                     this.props.form.resetFields();
+                    this.props.onTodoAdded(data);
                     message.success("Todo Added");
                 }).catch(err=>console.error(err));
             }
