@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
+import { APIBaseUrl } from '../appConfig';
 import { 
     Drawer,
     Form,
@@ -9,18 +11,30 @@ import {
     message
 } from 'antd';
 
-class UpdateTodoDrawer extends Component{
-    handleSubmit = (e) => {
+class UpdateTodoDrawer extends Component{    
+    handleSubmit = (e,id) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values)=> {
-            if(!err){
-                console.log(values);
+            if(!err){                                
+                let editedTodo = {                       
+                    title: values.title,
+                    description: values.description,
+                    tag: values.tag,
+                    status: "todo",
+                    addedOn: new Date().getTime()
+                }                
+                let url = APIBaseUrl + "/updateTodo/" + id;
+                Axios.put(url, editedTodo)
+                .then(res=>{
+                    let data = res.data.result;
+                    console.log(data);
+                }).catch(err=>console.error(err));
             }
         });        
     } 
     render(){
         const { getFieldDecorator } = this.props.form; 
-        let todoData = this.props.todoData;
+        let todoData = this.props.todoData;        
         return(
             <Drawer
                     title="Update Todo"
@@ -48,7 +62,7 @@ class UpdateTodoDrawer extends Component{
                             <Form.Item                                                            
                                 label="description"
                             >
-                                {getFieldDecorator('todoDescription',{   
+                                {getFieldDecorator('description',{   
                                     initialValue: todoData.description,                                 
                                 })(
                                     <Input placeholder="Todo Title"/>
@@ -71,7 +85,9 @@ class UpdateTodoDrawer extends Component{
                             </Row>
                             {/* Add Button */}
                             <Form.Item>
-                                <Button type="primary" icon="edit" htmlType="submit">Edit Todo</Button>
+                                <Button type="primary" icon="edit" onClick={(e)=>{                                                                       
+                                    this.handleSubmit(e, todoData._id);
+                                }}>Edit Todo</Button>
                                 &nbsp;
                                 <Button type="default" onClick={this.props.onClose}>Cancel</Button>
                             </Form.Item>
