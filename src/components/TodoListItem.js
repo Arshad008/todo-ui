@@ -32,7 +32,7 @@ const TodoListItem = (props) => {
                                             Axios.put(url, {status: "finished"})
                                             .then(res=>{
                                                 let data = res.data.result;
-                                                props.onUpdate(index,data);                                                                                                
+                                                props.onUpdateStatus(index,data);                                                                                                
                                             }).catch(err=>console.error(err));                                            
                                         }}></Button>
                                     </Tooltip>
@@ -41,7 +41,7 @@ const TodoListItem = (props) => {
                                         Axios.delete(url)
                                         .then(res=>{
                                             let data = res.data.result;
-                                            props.onDelete(index);
+                                            props.onDeleteTodo(index);
                                         })
                                         message.success("Todo Deleted");
                                     }}>
