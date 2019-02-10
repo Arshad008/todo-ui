@@ -19,11 +19,11 @@ class NewTodoDrawer extends Component{
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values)=> {
-            if(!err){                
+            if(!err){
                 let newTodo = {
                     title: values.title,
-                    description: values.description,
-                    tag: values.tag ? values.tag.toLowerCase() : " ",
+                    description: values.description == undefined ? " " : values.description,
+                    tag: values.tag == undefined ? " " : values.tag.toLowerCase(),
                     status: "todo",
                     addedOn: new Date().getTime()
                 }                
@@ -83,8 +83,7 @@ class NewTodoDrawer extends Component{
                         <Form.Item                                                            
                             label="Todo Description"
                         >
-                            {getFieldDecorator('description',{                                    
-                            })(
+                            {getFieldDecorator('description',)(
                                 <Input placeholder="Todo Title"/>
                             )}                           
                         </Form.Item>
@@ -92,9 +91,8 @@ class NewTodoDrawer extends Component{
                         <Form.Item                                                            
                             label="Tag"
                         >
-                            {getFieldDecorator('tag',{                                      
-                            })(
-                                <Input placeholder="EX:- Shopping, Learning"/>
+                            {getFieldDecorator('tag',)(
+                                <Input placeholder="Ex:- Shopping, Study"/>
                             )}                           
                         </Form.Item>
                         {/* Tags */}
