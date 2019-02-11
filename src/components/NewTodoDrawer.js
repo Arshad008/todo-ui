@@ -14,7 +14,8 @@ import {
 
 class NewTodoDrawer extends Component{
     state = {
-        visible: false
+        visible: false,
+        tag: ""
     }
     handleSubmit = (e) => {
         e.preventDefault();
@@ -53,7 +54,9 @@ class NewTodoDrawer extends Component{
         const { getFieldDecorator } = this.props.form;
         let tags = this.props.tags.map((t,i)=>{
             return(
-                <Tag color="lightblue" style={{marginTop: "5px"}}>{t}</Tag>
+                <Tag key={i} color="lightblue" style={{marginTop: "5px"}} onClick={()=>{
+                    this.setState({tag: t});
+                }}>{t}</Tag>
             );
         }); 
         return(
@@ -95,7 +98,9 @@ class NewTodoDrawer extends Component{
                         <Form.Item                                                            
                             label="Tag"
                         >
-                            {getFieldDecorator('tag',)(
+                            {getFieldDecorator('tag',{
+                                initialValue: this.state.tag
+                            })(
                                 <Input placeholder="Ex:- Shopping, Study"/>
                             )}                           
                         </Form.Item>
