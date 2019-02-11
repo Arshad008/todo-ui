@@ -101,6 +101,7 @@ class App extends Component {
     let newFinishedTodos = this.state.finishedTodos;
     newFinishedTodos.splice(index, 1);
     this.setState({finishedTodos: newFinishedTodos});
+    this.loadTags("all");
   }
   onTodoAdded(newTodo){
     let newTodos = this.state.todos;
