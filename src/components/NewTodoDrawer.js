@@ -22,8 +22,8 @@ class NewTodoDrawer extends Component{
             if(!err){
                 let newTodo = {
                     title: values.title,
-                    description: values.description == undefined ? " " : values.description,
-                    tag: values.tag == undefined ? " " : values.tag.toLowerCase(),
+                    description: values.description,
+                    tag: values.tag ? values.tag : "quick todo",
                     status: "todo",
                     addedOn: new Date().getTime()
                 }                
