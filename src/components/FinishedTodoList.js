@@ -11,7 +11,8 @@ const FinishedTodoList = (props) => {
                     key={i}
                     finishedTodo = {ftd}
                     index={i}
-                    onDeleteFinishedTodo={props.onDeleteFinishedTodo}/>
+                    onDeleteFinishedTodo={props.onDeleteFinishedTodo}
+                    onFinishedTodoUpdateStatus={props.onFinishedTodoUpdateStatus}/>
     });
     if(finishedTodos[0] == null){
         return(
