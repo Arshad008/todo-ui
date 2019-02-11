@@ -23,7 +23,7 @@ class NewTodoDrawer extends Component{
                 let newTodo = {
                     title: values.title,
                     description: values.description,
-                    tag: values.tag ? values.tag : "quick todo",
+                    tag: values.tag ? values.tag.trim() : "quick todo",
                     status: "todo",
                     addedOn: new Date().getTime()
                 }                

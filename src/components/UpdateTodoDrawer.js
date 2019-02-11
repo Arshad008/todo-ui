@@ -15,11 +15,11 @@ class UpdateTodoDrawer extends Component{
     handleSubmit = (e,id, index) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values)=> {
-            if(!err){                                
+            if(!err){                               
                 let editedTodo = {                       
                     title: values.title,
                     description: values.description,
-                    tag: values.tag === "" || values.tag === " " ? "quick todo" : values.tag,
+                    tag: values.tag === "" || values.tag === " " ? "quick todo" : values.tag.trim(),
                     status: "todo",
                     addedOn: new Date().getTime()
                 }                                                  
