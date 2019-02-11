@@ -150,23 +150,53 @@ class App extends Component {
           <Layout>
             {/* Content */}
             <Content>
-              <div className="content">
-                <Divider orientation="left">
-                  <Icon type="copy"/> TODOS
-                </Divider>
-                <TodoList 
-                  todos={this.state.todos}
-                  onTodoUpdateStatus={this.onTodoUpdateStatus.bind(this)}
-                  onDeleteTodo={this.onDeleteTodo.bind(this)}
-                  onTodoUpdated={this.onTodoUpdated.bind(this)}/>
-                <Divider orientation="left">
-                  <Icon type="check"/> Finished
-                </Divider>
-                <FinishedTodoList 
-                  finishedTodos={this.state.finishedTodos}
-                  onDeleteFinishedTodo={this.onDeleteFinishedTodo.bind(this)}
-                  onFinishedTodoUpdateStatus={this.onFinishedTodoUpdateStatus.bind(this)}/>
-              </div>
+              <Switch>
+                {/* Home */}
+                <Route path="/" exact>
+                  <div className="content">
+                    <Divider orientation="left">
+                      <Icon type="copy"/> TODOS
+                    </Divider>
+                    <TodoList 
+                      todos={this.state.todos}
+                      onTodoUpdateStatus={this.onTodoUpdateStatus.bind(this)}
+                      onDeleteTodo={this.onDeleteTodo.bind(this)}
+                      onTodoUpdated={this.onTodoUpdated.bind(this)}/>
+                    <Divider orientation="left">
+                      <Icon type="check"/> Finished
+                    </Divider>
+                    <FinishedTodoList 
+                      finishedTodos={this.state.finishedTodos}
+                      onDeleteFinishedTodo={this.onDeleteFinishedTodo.bind(this)}
+                      onFinishedTodoUpdateStatus={this.onFinishedTodoUpdateStatus.bind(this)}/>
+                  </div>
+                </Route>
+                {/* My Todos */}
+                <Route path="/myTodos">
+                  <div className="content">
+                    <Divider orientation="left">
+                        <Icon type="copy"/> TODOS
+                    </Divider>
+                    <TodoList
+                        todos={this.state.todos}
+                        onTodoUpdateStatus={this.onTodoUpdateStatus.bind(this)}
+                        onDeleteTodo={this.onDeleteTodo.bind(this)}
+                        onTodoUpdated={this.onTodoUpdated.bind(this)}/>
+                  </div>
+                </Route>
+                {/* Finished todos */}
+                <Route path="/finishedTodos">
+                  <div className="content">
+                    <Divider orientation="left">
+                      <Icon type="check"/> Finished
+                    </Divider>
+                    <FinishedTodoList 
+                      finishedTodos={this.state.finishedTodos}
+                      onDeleteFinishedTodo={this.onDeleteFinishedTodo.bind(this)}
+                      onFinishedTodoUpdateStatus={this.onFinishedTodoUpdateStatus.bind(this)}/>
+                  </div>
+                </Route>
+              </Switch>
             </Content>
             {/* Content End*/}          
           </Layout>
