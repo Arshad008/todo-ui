@@ -28,26 +28,40 @@ class App extends Component {
   state = {
     collapsed: false,
     todos:[],
-    finishedTodos:[]
+    finishedTodos:[],
+    tags:[]
   }
   onCollapse = (collapsed) => {
     this.setState({collapsed});
   }
+  loadTags(tag){
+    // get all tags
+    let tagsUrl = APIBaseUrl + "/tags/" + tag;
+    Axios.get(tagsUrl)
+    .then(res=>{
+      let data = res.data.result;
+      this.setState({tags: data});
+    })
+  }
   componentWillMount(){
+    // get todos
     let todosUrl = APIBaseUrl + "/todos";
     Axios.get(todosUrl)
     .then(res=>{
         let data = res.data.result;
         this.setState({todos: data});            
     }).catch(err=>console.error(err));
-
+    // get finished todos
     let finishedTodosUrl= APIBaseUrl + "/finishedTodos";
     Axios.get(finishedTodosUrl)
     .then(res=>{
         let data = res.data.result;
         this.setState({finishedTodos: data});                    
-    }).catch(err=>console.error(err));
-  }
+    }).catch(err=>console.error(err));  
+    // get all tags
+    let tag = "all";
+    this.loadTags(tag);
+  }  
   onTodoUpdateStatus(index,data){
     let newTodos = this.state.todos;
     let newFinishedTodos = this.state.finishedTodos;
@@ -71,7 +85,8 @@ class App extends Component {
   onDeleteTodo(index){
     let newTodos = this.state.todos;
     newTodos.splice(index,1);
-    this.setState({todos: newTodos});
+    this.setState({todos: newTodos});    
+    this.loadTags("all");
   }
   onDeleteFinishedTodo(index){
     let newFinishedTodos = this.state.finishedTodos;
@@ -82,6 +97,7 @@ class App extends Component {
     let newTodos = this.state.todos;
     newTodos.push(newTodo);
     this.setState({todos: newTodos});
+    this.loadTags("all");
   }
   onTodoUpdated(index,data){
     let newTodos = this.state.todos;    
@@ -89,6 +105,14 @@ class App extends Component {
     this.setState({todos: newTodos});
   }
   render() {
+    let tags = this.state.tags.map((t,i)=>{
+      return(        
+        <Menu.Item key={"tag" + i}>
+          <Icon type="minus"/>
+          <span>{t.tag}</span>          
+        </Menu.Item>
+      );
+    });
     return (
       <BrowserRouter>
         {/* Main Layout */}
@@ -119,18 +143,7 @@ class App extends Component {
               </Menu.Item>
               {/* Sub Menu */}
               <SubMenu key="subOne" title={<span><Icon type="tags"/><span>Tags</span></span>}>
-                <Menu.Item key={3}>
-                  <Icon type="minus"/>
-                  <span>quick todo</span>
-                </Menu.Item>
-                <Menu.Item key={4}>
-                  <Icon type="minus"/>
-                  <span>learning</span>
-                </Menu.Item>
-                <Menu.Item key={5}>
-                  <Icon type="minus"/>
-                  <span>shopping</span>
-                </Menu.Item>
+                {tags}
               </SubMenu>
               {/* Sub Menu End*/}
               <Menu.Item key="6">
