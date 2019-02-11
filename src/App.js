@@ -215,11 +215,12 @@ class App extends Component {
                     <Divider orientation="left">
                         <Icon type="copy"/> TODOS
                     </Divider>
-                    <TodoList
-                        todos={this.state.todos}
-                        onTodoUpdateStatus={this.onTodoUpdateStatus.bind(this)}
-                        onDeleteTodo={this.onDeleteTodo.bind(this)}
-                        onTodoUpdated={this.onTodoUpdated.bind(this)}/>
+                    <TodoList 
+                      todos={this.state.todos}
+                      onTodoUpdateStatus={this.onTodoUpdateStatus.bind(this)}
+                      onDeleteTodo={this.onDeleteTodo.bind(this)}
+                      onTodoUpdated={this.onTodoUpdated.bind(this)}
+                      tags={this.state.tags}/>
                   </div>
                 </Route>
                 {/* Finished todos */}
