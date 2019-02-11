@@ -113,6 +113,9 @@ class App extends Component {
     let newTodos = this.state.todos;    
     newTodos[index] = data;
     this.setState({todos: newTodos});
+    this.loadTodos("all");
+    this.loadTags("all");
+    this.loadFinishedTodos("all");
   }
   render() {    
     let tags = this.state.tags.map((t,i)=>{      
