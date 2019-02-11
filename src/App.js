@@ -23,7 +23,6 @@ const {
 } = Layout;
 
 const { SubMenu } = Menu;
-
 class App extends Component {
   state = {
     collapsed: false,
@@ -43,14 +42,19 @@ class App extends Component {
       this.setState({tags: data});
     })
   }
-  componentWillMount(){
+  loadTodos(tag){
     // get todos
-    let todosUrl = APIBaseUrl + "/todos";
+    let todosUrl = APIBaseUrl + "/todos/" + tag;
     Axios.get(todosUrl)
     .then(res=>{
         let data = res.data.result;
         this.setState({todos: data});            
     }).catch(err=>console.error(err));
+  }
+  componentWillMount(){
+    // get todos
+    let todoTag = "all";
+    this.loadTodos(todoTag);
     // get finished todos
     let finishedTodosUrl= APIBaseUrl + "/finishedTodos";
     Axios.get(finishedTodosUrl)
@@ -70,7 +74,7 @@ class App extends Component {
     this.setState({todos: newTodos});
     // append to finished todos
     newFinishedTodos.push(data);
-    this.setState({finishedTodos: newFinishedTodos});
+    this.setState({finishedTodos: newFinishedTodos});    
   }
   onFinishedTodoUpdateStatus(index,data){
     let newFinishedTodos = this.state.finishedTodos;
@@ -104,12 +108,15 @@ class App extends Component {
     newTodos[index] = data;
     this.setState({todos: newTodos});
   }
-  render() {
-    let tags = this.state.tags.map((t,i)=>{
+  render() {    
+    let tags = this.state.tags.map((t,i)=>{      
       return(        
-        <Menu.Item key={"tag" + i}>
+        <Menu.Item key={"tag" + i} onClick={()=>{
+          this.loadTodos(t);
+        }}>
           <Icon type="minus"/>
-          <span>{t.tag}</span>          
+          <span>{t}</span>
+          <Link to="/myTodos"/>
         </Menu.Item>
       );
     });
@@ -131,12 +138,16 @@ class App extends Component {
               mode="inline"
             >
               {/* Menu Items */}
-              <Menu.Item key="1" style={{marginTop: "50px"}}>
+              <Menu.Item key="1" style={{marginTop: "50px"}} onClick={()=>{
+                this.loadTodos("all");
+              }}>
                 <Icon type="home"/>
                 <span>Home</span>
                 <Link to="/"/>
               </Menu.Item>
-              <Menu.Item key="2">
+              <Menu.Item key="2" onClick={()=>{
+                this.loadTodos("all");
+              }}>
                 <Icon type="database"/>
                 <span>My Todos</span>
                 <Link to="/myTodos"/>
