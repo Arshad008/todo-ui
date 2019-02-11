@@ -43,15 +43,19 @@ class NewTodoDrawer extends Component{
         this.setState({
           visible: true,
         });
-    };
-    
+    };    
     onClose = () => {
         this.setState({
             visible: false,
         });
     }; 
     render(){
-        const { getFieldDecorator } = this.props.form; 
+        const { getFieldDecorator } = this.props.form;
+        let tags = this.props.tags.map((t,i)=>{
+            return(
+                <Tag color="lightblue" style={{marginTop: "5px"}}>{t}</Tag>
+            );
+        }); 
         return(
             <div>
                 <div align="center" style={{marginTop: "20px", width: "100%"}}>
@@ -97,8 +101,7 @@ class NewTodoDrawer extends Component{
                         </Form.Item>
                         {/* Tags */}
                         <Row style={{marginBottom: "20px"}}>
-                            <Tag color="lightBlue">Shopping</Tag>
-                            <Tag color="lightBlue">Learning</Tag>
+                            {tags}
                         </Row>
                         {/* Add Button */}
                         <Form.Item>

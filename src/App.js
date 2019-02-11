@@ -178,7 +178,8 @@ class App extends Component {
             {/* Menu End */}
             {/* Add New Button */}          
             <NewTodoDrawer
-              onTodoAdded={this.onTodoAdded.bind(this)}/>
+              onTodoAdded={this.onTodoAdded.bind(this)}
+              tags={this.state.tags}/>
             {/* Add new button end */}
           </Sider>
           {/* Sider End */}
