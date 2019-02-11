@@ -51,17 +51,22 @@ class App extends Component {
         this.setState({todos: data});            
     }).catch(err=>console.error(err));
   }
+  loadFinishedTodos(tag){
+    // get finished todos
+    let finishedTodosUrl= APIBaseUrl + "/finishedTodos/" + tag;
+    Axios.get(finishedTodosUrl)
+    .then(res=>{
+        let data = res.data.result;
+        this.setState({finishedTodos: data});                    
+    }).catch(err=>console.error(err)); 
+  }
   componentWillMount(){
     // get todos
     let todoTag = "all";
     this.loadTodos(todoTag);
     // get finished todos
-    let finishedTodosUrl= APIBaseUrl + "/finishedTodos";
-    Axios.get(finishedTodosUrl)
-    .then(res=>{
-        let data = res.data.result;
-        this.setState({finishedTodos: data});                    
-    }).catch(err=>console.error(err));  
+    let finishedTodoTag = "all";  
+    this.loadFinishedTodos(tag);
     // get all tags
     let tag = "all";
     this.loadTags(tag);
@@ -113,10 +118,11 @@ class App extends Component {
       return(        
         <Menu.Item key={"tag" + i} onClick={()=>{
           this.loadTodos(t);
+          this.loadFinishedTodos(t);
         }}>
           <Icon type="minus"/>
           <span>{t}</span>
-          <Link to="/myTodos"/>
+          <Link to="/"/>
         </Menu.Item>
       );
     });
@@ -140,6 +146,7 @@ class App extends Component {
               {/* Menu Items */}
               <Menu.Item key="1" style={{marginTop: "50px"}} onClick={()=>{
                 this.loadTodos("all");
+                this.loadFinishedTodos("all");
               }}>
                 <Icon type="home"/>
                 <span>Home</span>
@@ -147,6 +154,7 @@ class App extends Component {
               </Menu.Item>
               <Menu.Item key="2" onClick={()=>{
                 this.loadTodos("all");
+                this.loadFinishedTodos("all");
               }}>
                 <Icon type="database"/>
                 <span>My Todos</span>
