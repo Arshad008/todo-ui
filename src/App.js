@@ -66,7 +66,7 @@ class App extends Component {
     this.loadTodos(todoTag);
     // get finished todos
     let finishedTodoTag = "all";  
-    this.loadFinishedTodos(tag);
+    this.loadFinishedTodos(finishedTodoTag);
     // get all tags
     let tag = "all";
     this.loadTags(tag);
