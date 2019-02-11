@@ -152,7 +152,7 @@ class App extends Component {
             <Content>
               <div className="content">
                 <Divider orientation="left">
-                  TODOS
+                  <Icon type="copy"/> TODOS
                 </Divider>
                 <TodoList 
                   todos={this.state.todos}
@@ -160,7 +160,7 @@ class App extends Component {
                   onDeleteTodo={this.onDeleteTodo.bind(this)}
                   onTodoUpdated={this.onTodoUpdated.bind(this)}/>
                 <Divider orientation="left">
-                  Finished
+                  <Icon type="check"/> Finished
                 </Divider>
                 <FinishedTodoList 
                   finishedTodos={this.state.finishedTodos}
