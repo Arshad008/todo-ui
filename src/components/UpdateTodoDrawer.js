@@ -22,12 +22,11 @@ class UpdateTodoDrawer extends Component{
                     tag: values.tag,
                     status: "todo",
                     addedOn: new Date().getTime()
-                }                
-                let url = APIBaseUrl + "/updateTodo/" + id;
+                }                                                  
+                let url = APIBaseUrl + "/updateTodo/" + id;                
                 Axios.put(url, editedTodo)
-                .then(res=>{
-                    let data = res.data.result;                    
-                    this.props.onTodoUpdated(index,editedTodo);                    
+                .then(res=>{                    
+                    this.props.onTodoUpdated(index,editedTodo);
                     this.props.onClose();
                     message.success("Todo Updated");
                 }).catch(err=>console.error(err));
