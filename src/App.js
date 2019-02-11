@@ -48,7 +48,7 @@ class App extends Component {
         this.setState({finishedTodos: data});                    
     }).catch(err=>console.error(err));
   }
-  onUpdateStatus(index,data){
+  onTodoUpdateStatus(index,data){
     let newTodos = this.state.todos;
     let newFinishedTodos = this.state.finishedTodos;
     // cut from todos
@@ -57,6 +57,16 @@ class App extends Component {
     // append to finished todos
     newFinishedTodos.push(data);
     this.setState({finishedTodos: newFinishedTodos});
+  }
+  onFinishedTodoUpdateStatus(index,data){
+    let newFinishedTodos = this.state.finishedTodos;
+    let newTodos = this.state.todos;
+    // cut from finished todos
+    newFinishedTodos.splice(index,1);
+    this.setState({finishedTodos: newFinishedTodos});
+    // append to todos
+    newTodos.push(data);
+    this.setState({todos: newTodos});
   }
   onDeleteTodo(index){
     let newTodos = this.state.todos;
@@ -79,6 +89,15 @@ class App extends Component {
     this.setState({todos: newTodos});
   }
   render() {
+    let tags = this.state.todos.map((td, i)=>{
+      
+      return(
+        <Menu.Item key={"sub"+i}>
+          <Icon type="minus"/>
+          <span>{td.tag}</span>
+        </Menu.Item>
+      );
+    });
     return (
       <BrowserRouter>
         {/* Main Layout */}
@@ -108,19 +127,8 @@ class App extends Component {
                 <Link to="/myTodos"/>
               </Menu.Item>
               {/* Sub Menu */}
-              <SubMenu key="sub1" title={<span><Icon type="tags"/><span>Categories</span></span>}>
-                <Menu.Item key="3">
-                  <Icon type="minus"/>
-                  <span>Shopping</span>
-                </Menu.Item>
-                <Menu.Item key="4">
-                  <Icon type="minus"/>
-                  <span>Learning</span>
-                </Menu.Item>
-                <Menu.Item key="5">
-                  <Icon type="minus"/>
-                  <span>Evening activities</span>
-                </Menu.Item>
+              <SubMenu key="subOne" title={<span><Icon type="tags"/><span>Tags</span></span>}>
+                {tags}
               </SubMenu>
               {/* Sub Menu End*/}
               <Menu.Item key="6">
@@ -146,7 +154,7 @@ class App extends Component {
                 </Divider>
                 <TodoList 
                   todos={this.state.todos}
-                  onUpdateStatus={this.onUpdateStatus.bind(this)}
+                  onTodoUpdateStatus={this.onTodoUpdateStatus.bind(this)}
                   onDeleteTodo={this.onDeleteTodo.bind(this)}
                   onTodoUpdated={this.onTodoUpdated.bind(this)}/>
                 <Divider orientation="left">
@@ -154,7 +162,8 @@ class App extends Component {
                 </Divider>
                 <FinishedTodoList 
                   finishedTodos={this.state.finishedTodos}
-                  onDeleteFinishedTodo={this.onDeleteFinishedTodo.bind(this)}/>
+                  onDeleteFinishedTodo={this.onDeleteFinishedTodo.bind(this)}
+                  onFinishedTodoUpdateStatus={this.onFinishedTodoUpdateStatus.bind(this)}/>
               </div>
             </Content>
             {/* Content End*/}          
