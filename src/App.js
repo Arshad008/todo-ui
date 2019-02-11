@@ -89,6 +89,15 @@ class App extends Component {
     this.setState({todos: newTodos});
   }
   render() {
+    let tags = this.state.todos.map((td, i)=>{
+      
+      return(
+        <Menu.Item key={"sub"+i}>
+          <Icon type="minus"/>
+          <span>{td.tag}</span>
+        </Menu.Item>
+      );
+    });
     return (
       <BrowserRouter>
         {/* Main Layout */}
@@ -118,19 +127,8 @@ class App extends Component {
                 <Link to="/myTodos"/>
               </Menu.Item>
               {/* Sub Menu */}
-              <SubMenu key="sub1" title={<span><Icon type="tags"/><span>Categories</span></span>}>
-                <Menu.Item key="3">
-                  <Icon type="minus"/>
-                  <span>Shopping</span>
-                </Menu.Item>
-                <Menu.Item key="4">
-                  <Icon type="minus"/>
-                  <span>Learning</span>
-                </Menu.Item>
-                <Menu.Item key="5">
-                  <Icon type="minus"/>
-                  <span>Evening activities</span>
-                </Menu.Item>
+              <SubMenu key="subOne" title={<span><Icon type="tags"/><span>Tags</span></span>}>
+                {tags}
               </SubMenu>
               {/* Sub Menu End*/}
               <Menu.Item key="6">
