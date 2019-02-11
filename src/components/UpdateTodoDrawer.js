@@ -19,7 +19,7 @@ class UpdateTodoDrawer extends Component{
                 let editedTodo = {                       
                     title: values.title,
                     description: values.description,
-                    tag: values.tag,
+                    tag: values.tag === "" || values.tag === " " ? "quick todo" : values.tag,
                     status: "todo",
                     addedOn: new Date().getTime()
                 }                                                  
