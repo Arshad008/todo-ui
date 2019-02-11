@@ -14,7 +14,8 @@ const TodoList = (props) => {
                     index={i}
                     onTodoUpdateStatus={props.onTodoUpdateStatus}
                     onDeleteTodo={props.onDeleteTodo}
-                    onTodoUpdated={props.onTodoUpdated}/>
+                    onTodoUpdated={props.onTodoUpdated}
+                    tags={props.tags}/>
         );
     });
     if(todos[0] == null){

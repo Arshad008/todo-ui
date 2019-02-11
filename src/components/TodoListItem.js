@@ -73,7 +73,8 @@ class TodoListItem extends Component{
                                         visible={this.state.visible}
                                         todoData={todoData}
                                         index={index}
-                                        onTodoUpdated={this.props.onTodoUpdated}/>
+                                        onTodoUpdated={this.props.onTodoUpdated}
+                                        tags={this.props.tags}/>
                                 </div>
                             </div>
                         }     

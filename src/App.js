@@ -198,7 +198,8 @@ class App extends Component {
                       todos={this.state.todos}
                       onTodoUpdateStatus={this.onTodoUpdateStatus.bind(this)}
                       onDeleteTodo={this.onDeleteTodo.bind(this)}
-                      onTodoUpdated={this.onTodoUpdated.bind(this)}/>
+                      onTodoUpdated={this.onTodoUpdated.bind(this)}
+                      tags={this.state.tags}/>
                     <Divider orientation="left">
                       <Icon type="check"/> Finished
                     </Divider>
