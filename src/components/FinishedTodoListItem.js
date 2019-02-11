@@ -7,8 +7,7 @@ import {
     Tag,
     Button,
     Tooltip,
-    Icon,
-    message
+    Icon
 } from 'antd';
 
 const { Meta } = Card;
@@ -35,15 +34,20 @@ const FinishedTodoListItem = (props) => {
                                 <div style={{textAlign: "justify"}}><strike>{finsihedTodoData.description}</strike></div>
                                 <div>
                                     <Tag color="gray" style={{marginTop: "10px"}}>{finsihedTodoData.tag}</Tag>                                                                                
-                                    <Tooltip title="Delete">
+                                    <Tooltip title="Delete">                                        
                                         <Button type="danger" shape="circle" icon="delete" style={{float: "right", marginRight: "5px"}} onClick={()=>{
                                             let url = APIBaseUrl + "/delete/" + finsihedTodoData._id;
                                             Axios.delete(url)
-                                            .then(res=>{
-                                                let data = res.data.result;
+                                            .then(res=>{                                                
                                                 props.onDeleteFinishedTodo(index);
                                             }).catch(err=>console.error(err));
-                                        }}></Button>
+                                        }}></Button>                                        
+                                    </Tooltip>
+                                    <Tooltip title="Undo">
+                                        <Button type="default" shape="circle" icon="undo" style={{float: "right", marginRight: "5px"}} onClick={()=>{
+                                            console.log(index, finsihedTodoData._id);
+                                        }}>                                            
+                                        </Button>
                                     </Tooltip>
                                 </div>
                             </div>
