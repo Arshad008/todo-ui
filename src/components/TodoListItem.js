@@ -47,7 +47,7 @@ class TodoListItem extends Component{
                                             Axios.put(url, {status: "finished"})
                                             .then(res=>{
                                                 let data = res.data.result;
-                                                this.props.onUpdateStatus(index,data);                                                                                                
+                                                this.props.onTodoUpdateStatus(index,data);                                                                                                
                                             }).catch(err=>console.error(err));                                            
                                         }}></Button>
                                     </Tooltip>

@@ -12,7 +12,7 @@ const TodoList = (props) => {
                     key={i}
                     todo={td}
                     index={i}
-                    onUpdateStatus={props.onUpdateStatus}
+                    onTodoUpdateStatus={props.onTodoUpdateStatus}
                     onDeleteTodo={props.onDeleteTodo}
                     onTodoUpdated={props.onTodoUpdated}/>
         );
