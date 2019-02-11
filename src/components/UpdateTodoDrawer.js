@@ -11,7 +11,10 @@ import {
     message
 } from 'antd';
 
-class UpdateTodoDrawer extends Component{    
+class UpdateTodoDrawer extends Component{  
+    state = {
+        tag: this.props.todoData.tag
+    }  
     handleSubmit = (e,id, index) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values)=> {
@@ -39,7 +42,9 @@ class UpdateTodoDrawer extends Component{
         let index = this.props.index;  
         let tags = this.props.tags.map((t,i)=>{
             return(
-                <Tag key={i} color="lightblue" style={{marginTop: "5px"}}>{t}</Tag>
+                <Tag key={i} color="lightblue" style={{marginTop: "5px"}} onClick={()=>{
+                    this.setState({tag: t});
+                }}>{t}</Tag>
             );
         });
         return(
@@ -80,7 +85,7 @@ class UpdateTodoDrawer extends Component{
                                 label="Tag"
                             >
                                 {getFieldDecorator('tag',{ 
-                                    initialValue: todoData.tag,                                     
+                                    initialValue: this.state.tag,                                     
                                 })(
                                     <Input placeholder="EX:- Shopping, Learning"/>
                                 )}                           
