@@ -37,9 +37,9 @@ class TodoListItem extends Component{
                     <Meta
                         title= {todoData.title}
                         description={
-                            <div>
+                            <div>                                
                                 <div style={{textAlign: "justify"}}>{todoData.description}</div>
-                                <div style={{margin: "5px"}}>{todoData.tag == " " ? " " :  <Tag color="gray" style={{marginTop: "10px"}}>{todoData.tag}</Tag>}</div>
+                                <div style={{margin: "5px"}}><Tag color="gray" style={{marginTop: "10px"}}>{todoData.tag.toLowerCase()}</Tag></div>
                                 <div align="right">                                                                                
                                     <Tooltip title="Done">
                                         <Button type="default" shape="circle" icon="check" style={{marginRight: "5px"}} onClick={()=>{
