@@ -37,6 +37,11 @@ class UpdateTodoDrawer extends Component{
         const { getFieldDecorator } = this.props.form; 
         let todoData = this.props.todoData;      
         let index = this.props.index;  
+        let tags = this.props.tags.map((t,i)=>{
+            return(
+                <Tag key={i} color="lightblue" style={{marginTop: "5px"}}>{t}</Tag>
+            );
+        });
         return(
             <Drawer
                     title="Update Todo"
@@ -82,8 +87,7 @@ class UpdateTodoDrawer extends Component{
                             </Form.Item>
                             {/* Tags */}
                             <Row style={{marginBottom: "20px"}}>
-                                <Tag color="lightBlue">Shopping</Tag>
-                                <Tag color="lightBlue">Learning</Tag>
+                                {tags}
                             </Row>
                             {/* Add Button */}
                             <Form.Item>
