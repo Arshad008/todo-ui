@@ -45,7 +45,12 @@ const FinishedTodoListItem = (props) => {
                                     </Tooltip>
                                     <Tooltip title="Undo">
                                         <Button type="default" shape="circle" icon="undo" style={{float: "right", marginRight: "5px"}} onClick={()=>{
-                                            console.log(index, finsihedTodoData._id);
+                                            let url = APIBaseUrl + "/updateStatus/" + finsihedTodoData._id;
+                                            Axios.put(url, {status: "todo"})
+                                            .then(res=>{
+                                                let data = res.data.result;
+                                                props.onFinishedTodoUpdateStatus(index,data);
+                                            }).catch(err=>console.error(err));
                                         }}>                                            
                                         </Button>
                                     </Tooltip>
