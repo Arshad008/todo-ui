@@ -237,7 +237,13 @@ class App extends Component {
                 </Route>
               </Switch>
             </Content>
-            {/* Content End*/}          
+            {/* Content End*/} 
+            {/* Footer */}
+            <Footer style={{bottom: "0", width: "100%", textAlign: "center"}}>
+              <p>Created By</p>
+              <a href="https://github.com/Arshad008" target="_blank"><Icon type="github"/>github.com/Arshad008</a>
+            </Footer>
+            {/* Footer end */}
           </Layout>
           {/* Sub layout end */}
         </Layout>
