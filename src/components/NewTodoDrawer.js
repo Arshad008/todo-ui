@@ -35,6 +35,7 @@ class NewTodoDrawer extends Component{
                     this.props.form.resetFields();
                     this.props.onTodoAdded(data);
                     message.success("Todo Added");
+                    this.setState({tag: ""});
                     this.onClose();
                 }).catch(err=>console.error(err));
             }
@@ -48,6 +49,7 @@ class NewTodoDrawer extends Component{
     onClose = () => {
         this.setState({
             visible: false,
+            tag: ""
         });
     }; 
     render(){
