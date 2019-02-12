@@ -33,7 +33,7 @@ const FinishedTodoListItem = (props) => {
                             <div>
                                 <div style={{textAlign: "justify"}}><strike>{finsihedTodoData.description}</strike></div>
                                 <div>
-                                    <Tag color="gray" style={{marginTop: "10px"}}>{finsihedTodoData.tag}</Tag>                                                                                
+                                    <Tag color="gray" style={{marginTop: "10px"}}><strike>{finsihedTodoData.tag}</strike></Tag>
                                     <Tooltip title="Delete">                                        
                                         <Button type="danger" shape="circle" icon="delete" style={{float: "right", marginRight: "5px"}} onClick={()=>{
                                             let url = APIBaseUrl + "/delete/" + finsihedTodoData._id;
