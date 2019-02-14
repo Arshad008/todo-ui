@@ -119,6 +119,7 @@ class App extends Component {
     let tags = this.state.tags.map((t,i)=>{      
       return(        
         <Menu.Item key={"tag" + i} onClick={()=>{
+          this.loadTags("all");
           this.loadTodos(t);
           this.loadFinishedTodos(t);
         }}>
