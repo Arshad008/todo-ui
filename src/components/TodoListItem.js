@@ -35,6 +35,7 @@ class TodoListItem extends Component{
             <Col xxl={6} xl={8} lg={12} md={12} sm={24} xs={24}>
                 <Card className="card">
                     <Meta
+                        className="line"
                         title= {todoData.title}
                         description={
                             <div>                                
@@ -54,8 +55,7 @@ class TodoListItem extends Component{
                                     <Popconfirm title="Are you sure you want to Delete this Todo?" onConfirm={()=>{
                                         let url = APIBaseUrl + "/delete/" + todoData._id;
                                         Axios.delete(url)
-                                        .then(res=>{
-                                            let data = res.data.result;
+                                        .then(res=>{                                            
                                             this.props.onDeleteTodo(index);
                                         })
                                         message.success("Todo Deleted");
@@ -77,8 +77,7 @@ class TodoListItem extends Component{
                                         tags={this.props.tags}/>
                                 </div>
                             </div>
-                        }     
-                        className="line"
+                        }                             
                     >                                 
                     </Meta>                    
                 </Card>                    
