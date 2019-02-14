@@ -78,6 +78,7 @@ class App extends Component {
     this.setState({todos: newTodos});
     // append to finished todos
     newFinishedTodos.push(data);
+    newFinishedTodos.reverse();
     this.setState({finishedTodos: newFinishedTodos});    
   }
   onFinishedTodoUpdateStatus(index,data){
@@ -104,6 +105,7 @@ class App extends Component {
   onTodoAdded(newTodo){
     let newTodos = this.state.todos;
     newTodos.push(newTodo);
+    newTodos.reverse();
     this.setState({todos: newTodos});
     this.loadTags("all");
   }
