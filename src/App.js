@@ -5,8 +5,6 @@ import {
   Layout, 
   Menu,
   Icon,
-  Button,
-  Tooltip,
   Divider
 } from 'antd';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
@@ -15,8 +13,7 @@ import TodoList from './components/TodoList';
 import FinishedTodoList from './components/FinishedTodoList';
 import NewTodoDrawer from './components/NewTodoDrawer';
 
-const { 
-  Header, 
+const {  
   Content, 
   Footer, 
   Sider 
@@ -40,7 +37,7 @@ class App extends Component {
     .then(res=>{
       let data = res.data.result;
       this.setState({tags: data});
-    })
+    }).catch(err=>console.error(err));
   }
   loadTodos(tag){
     // get todos
@@ -48,6 +45,7 @@ class App extends Component {
     Axios.get(todosUrl)
     .then(res=>{
         let data = res.data.result;
+        data.reverse();
         this.setState({todos: data});            
     }).catch(err=>console.error(err));
   }
@@ -57,6 +55,7 @@ class App extends Component {
     Axios.get(finishedTodosUrl)
     .then(res=>{
         let data = res.data.result;
+        data.reverse();
         this.setState({finishedTodos: data});                    
     }).catch(err=>console.error(err)); 
   }
@@ -85,11 +84,10 @@ class App extends Component {
     let newFinishedTodos = this.state.finishedTodos;
     let newTodos = this.state.todos;
     // cut from finished todos
-    newFinishedTodos.splice(index,1);
-    this.setState({finishedTodos: newFinishedTodos});
+    newFinishedTodos.splice(index,1);    
     // append to todos
     newTodos.push(data);
-    this.setState({todos: newTodos});
+    this.setState({todos: newTodos, finishedTodos: newFinishedTodos});
   }
   onDeleteTodo(index){
     let newTodos = this.state.todos;
@@ -246,7 +244,7 @@ class App extends Component {
             {/* Footer */}
             <Footer style={{bottom: "0", width: "100%", textAlign: "center"}}>
               <p>Created By</p>
-              <a href="https://github.com/Arshad008" target="_blank"><Icon type="github"/>github.com/Arshad008</a>
+              <a href="https://github.com/Arshad008" target="_blank" rel="noopener noreferrer"><Icon type="github"/>github.com/Arshad008</a>
             </Footer>
             {/* Footer end */}
           </Layout>
