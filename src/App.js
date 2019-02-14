@@ -149,6 +149,7 @@ class App extends Component {
             >
               {/* Menu Items */}
               <Menu.Item key="1" style={{marginTop: "50px"}} onClick={()=>{
+                this.loadTags("all");
                 this.loadTodos("all");
                 this.loadFinishedTodos("all");
               }}>
@@ -157,6 +158,7 @@ class App extends Component {
                 <Link to="/"/>
               </Menu.Item>
               <Menu.Item key="2" onClick={()=>{
+                this.loadTags("all");
                 this.loadTodos("all");
                 this.loadFinishedTodos("all");
               }}>
@@ -169,7 +171,10 @@ class App extends Component {
                 {tags}
               </SubMenu>
               {/* Sub Menu End*/}
-              <Menu.Item key="6">
+              <Menu.Item key="6" onClick={()=>{
+                this.loadTags("all");
+                this.loadFinishedTodos("all");                
+              }}>
                 <Icon type="check"/>
                 <span>Finished</span>
                 <Link to="/finishedTodos"></Link>
