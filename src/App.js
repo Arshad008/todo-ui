@@ -44,9 +44,8 @@ class App extends Component {
     let todosUrl = APIBaseUrl + "/todos/" + tag;
     Axios.get(todosUrl)
     .then(res=>{
-        let data = res.data.result;
-        data.reverse();
-        this.setState({todos: data});            
+        let data = res.data.result;        
+        this.setState({todos: data});                    
     }).catch(err=>console.error(err));
   }
   loadFinishedTodos(tag){
@@ -55,7 +54,6 @@ class App extends Component {
     Axios.get(finishedTodosUrl)
     .then(res=>{
         let data = res.data.result;
-        data.reverse();
         this.setState({finishedTodos: data});                    
     }).catch(err=>console.error(err)); 
   }
@@ -78,8 +76,8 @@ class App extends Component {
     this.setState({todos: newTodos});
     // append to finished todos
     newFinishedTodos.push(data);
-    newFinishedTodos.reverse();
-    this.setState({finishedTodos: newFinishedTodos});    
+    this.setState({finishedTodos: newFinishedTodos});      
+    this.loadFinishedTodos("all"); 
   }
   onFinishedTodoUpdateStatus(index,data){
     let newFinishedTodos = this.state.finishedTodos;
@@ -89,6 +87,7 @@ class App extends Component {
     // append to todos
     newTodos.push(data);
     this.setState({todos: newTodos, finishedTodos: newFinishedTodos});
+    this.loadTodos("all"); 
   }
   onDeleteTodo(index){
     let newTodos = this.state.todos;
@@ -103,9 +102,8 @@ class App extends Component {
     this.loadTags("all");
   }
   onTodoAdded(newTodo){
-    let newTodos = this.state.todos;
-    newTodos.push(newTodo);
-    newTodos.reverse();
+    let newTodos = this.state.todos;    
+    newTodos.unshift(newTodo);    
     this.setState({todos: newTodos});
     this.loadTags("all");
   }
